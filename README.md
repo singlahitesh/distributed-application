@@ -1,2 +1,2 @@
 # distributed-application
-Distributed java spring boot application
+Distributed java spring boot application.
