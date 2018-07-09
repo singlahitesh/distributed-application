@@ -1,0 +1,12 @@
+Difference between Slf4j anf log4j(or Logback) is same as difference between JPA and Hibernate
+
+Application
+Logging Code ----> SLF4J API---->Bridge---->Log4J2
+
+SL4J does not provide a complete logging solution.
+With SL4J, you cannot perform operations such as configuring appenders or setting logging levels.
+You perform such configurations through a configuration file of the logging framework in use.
+As the configuration file remains external to the application,
+no dependencies exist between your application code and the underlying logging framework.
+
+By default Spring Boot uses slf4j with logback.

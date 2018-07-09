@@ -1,0 +1,7 @@
+Flyway's name convention consists of:
+
+Prefix: Defaults to V.
+Version: Dots or underscores separated in as many parts as one likes.
+Separator: Defaults to __ (two underscores) and separates the version from the description.
+Description: A text with words separated by underscores or spaces.
+Suffix: Defaults to .sql.

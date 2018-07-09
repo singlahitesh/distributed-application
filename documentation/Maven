@@ -1,0 +1,40 @@
+Maven Model version
+
+It is always set to 4.0.0 in Maven 2 and 3, because, at present, there is no other model.
+Notice that modelVersion contains 4.0.0 . That is currently the only supported POM version for Maven 2 and is always required
+But it wouldn't necessarily need to always be set to 4.0.0 if there was another version of the model. A POM has to comply with a model. Let's say Maven 4 comes up with model 4.1. If you write your pom to comply with 4.1, it wouldn't be compatible with Maven 3 and model 4.0.0.
+
+
+artifact and group id
+
+artifactId is the name of the jar without version. If you created it then you can choose whatever name you want with lowercase letters and no strange symbols. If it's a third party jar you have to take the name of the jar as it's distributed. eg. maven, commons-math
+groupId will identify your project uniquely across all projects, so we need to enforce a naming schema. It has to follow the package name rules, what means that has to be at least as a domain name you control, and you can create as many subgroups as you want. Look at More information about package names. eg. org.apache.maven, org.apache.commons
+
+Introduction to pom
+<html>http://maven.apache.org/guides/introduction/introduction-to-the-pom.html</html>
+
+Plugins : Plugins are excutions. Eg: compilation of java, running of test cases
+Dependencies : Classes needed for performing those executions. Eg: spring classes needed for annotaion @Transactional
+
+Project Inheritance vs Aggregation
+
+Inheritance is specifying parent in module
+Aggregation is specifying module in parent
+
+
+Uber jar
+an uber-jar is an "over-jar", one level up from a simple "jar", defined as one that contains both your package and all its dependencies in one single JAR file.
+
+Folder Structure
+defaults defined in super pom
+src/main/java
+src/test/java
+
+mark java folder directory as source root for configuring java classes inside that directory.
+Make pom.xml managed
+
+Spring boot maven plugin
+It collects all the jars on the classpath and builds a single, runnable "über-jar", which makes it more convenient to execute and transport your service.
+It searches for the public static void main() method to flag as a runnable class.
+It provides a built-in dependency resolver that sets the version number to match Spring Boot dependencies. You can override any version you wish, but it will default to Boot’s chosen set of versions.
+

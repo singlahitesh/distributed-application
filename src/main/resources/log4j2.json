@@ -1,0 +1,21 @@
+{
+  "configuration" : {
+    "name" : "da",
+    "properties" :{
+      "property" :[
+        {
+          "name" :"log-path",
+          "value" : "log/distributed-application"
+        },
+        {
+          "name" : "archive",
+          "values" : "${log-path}/archive"
+        }
+      ]
+    },
+    "appenders": {
+    },
+    "loggers": {
+    }
+  }
+}
