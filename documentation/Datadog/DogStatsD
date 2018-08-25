@@ -1,0 +1,37 @@
+The easiest way to get your custom application metrics into Datadog
+is to send them to DogStatsD, a metrics aggregation service bundled
+with the Datadog Agent. DogStatsD implements the StatsD protocol and
+adds a few Datadog-specific extensions:
+
+Histogram metric type
+Service Checks and Events
+Tagging
+Any compliant StatsD client will work, but you won’t be able to use
+the Datadog-specific extensions.
+
+
+
+How it works
+DogStatsD accepts custom metrics, events, and service Checks over UDP and
+periodically aggregates and forwards them to Datadog.
+Because it uses UDP, your application can send metrics to DogStatsD and
+resume its work without waiting for a response.
+If DogStatsD ever becomes unavailable, your application won’t skip a beat.
+
+
+As it receives data, DogStatsD aggregates multiple data points for
+each unique metric into a single data point over a period of time called
+the flush interval. Consider the following example,
+wherein DogStatsD is instructed to increment a counter
+each time a given database query is called:
+
+def query_my_database():
+    dog.increment('database.query.count')
+    # Run the query ...
+
+If this function executes one hundred times during a flush interval
+(ten seconds, by default), it sends DogStatsD one hundred UDP packets
+that say “increment the counter database.query.count”.
+DogStatsD aggregates these points into a single metric value (100, in this case)
+and sends it to Datadog where it is stored and available for graphing
+alongside the rest of your metrics.

@@ -12,3 +12,54 @@ such as setting up a DispatcherServlet.
 
 @ComponentScan tells Spring to look for other components, configurations, and services
 in the package, allowing it to find the controllers.
+
+-------------------------------------------------------------------------------------------
+
+@Configuration
+This annotation is used on classes which define beans.
+@Configuration is an analog for XML configuration file – it is configuration using Java class.
+Java class annotated with @Configuration is a configuration by itself and will have methods to instantiate and configure the dependencies.
+
+---------------------------------------------------------------------------------------------
+
+@Bean
+This annotation is used at the method level.
+@Bean annotation works with @Configuration to create Spring beans.
+As mentioned earlier, @Configuration will have methods to instantiate and configure dependencies.
+Such methods will be annotated with @Bean. The method annotated with this annotation works as bean ID and it creates and returns the actual bean.
+
+-----------------------------------------------------------------------------------------------
+
+@Bean(destroyMethod = "close")
+
+As a convenience to the user, the container will attempt to infer a destroy method against an object returned from the @Bean method.
+For example, given an @Bean method returning an Apache Commons DBCP  BasicDataSource, the container will notice the close() method available on that object and automatically register it as the  destroyMethod.
+This 'destroy method inference' is currently limited to detecting only public, no-arg methods named 'close' or 'shutdown'.
+
+-------------------------------------------------------------------
+@ConfigurationProperties (Spring Boot)
+
+@ConfigurationProperties(prefix = "datasource.postgres")
+@Bean
+@Primary
+public DataSource dataSource() {
+    return DataSourceBuilder
+        .create()
+        .build();
+}
+If it is not feasible for you, then you can use
+
+@Bean
+@Primary
+public DataSource dataSource() {
+    return DataSourceBuilder
+        .create()
+        .username("")
+        .password("")
+        .url("")
+        .driverClassName("")
+        .build();
+}
+
+Set the required params for bean with given prefix
+

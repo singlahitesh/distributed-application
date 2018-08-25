@@ -1,0 +1,56 @@
+The Datadog Agent is a piece of software that runs on your hosts.
+Its job is to faithfully collect events and metrics and
+bring them to Datadog on your behalf so that you can do
+something useful with your monitoring and performance data.
+
+The Agent has three main parts:
+the collector, DogStatsD, and the forwarder:
+
+Collector: Runs checks on the current machine for whatever
+integrations you have, and captures system metrics
+such as memory and CPU.
+
+DogStatsD: A StatsD-compatible backend server that you can
+send custom metrics to from your own applications.
+
+Forwarder: Retrieves data from both DogStatsD and the collector,
+and then queues it up to be sent to Datadog.
+
+This is all controlled by one supervisor process.
+We keep this separate so you don’t have to deal with
+the overhead of each application if you don’t want to
+run all parts (although we generally recommend that you do).
+
+
+
+Agent 6 is the latest major version of the Datadog Agent.
+The big difference between Agent 5 and Agent 6 is that Agent 6
+is a complete rewrite of the core Agent in Golang.
+Golang has allowed us to take advantage of concurrency.
+In place of the three processes the Agent v5 used to run
+–the Forwarder, the Collector, and DogStatsD– there is now only
+one process: the Agent
+
+
+ It also comes with a number of other core improvements:
+
+Agent v6 has significantly improved resource usage over Agent v5:
+
+It has decreased CPU usage
+It has decrease memory usage
+It uses fewer file descriptors
+It has an all around decreased footprint
+Distributions metrics can be performed on the server directly
+to calculate real, effective global percentiles.
+(NOTE: this feature is currently in BETA. Contact support for details on how to have it enabled for your account.)
+
+DogStatsD can be used over a Unix socket instead of over udp.
+
+Custom build your Agent v6 and DogStatsD much easier and
+with much more configuration options, to include or exclude
+almost anything. There is also a “puppy” Agent,
+which is a truly minimal installation.
+
+Agent 6 uses ports 5000 and 5001 by default.
+You can specify different ports for expvar_port and cmd_port
+in the datadog.yaml file.

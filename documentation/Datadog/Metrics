@@ -1,0 +1,31 @@
+Submitting Metrics
+
+There are multiple ways to send metrics to Datadog:
+
+Via the Datadog Agent directly. Learn how to write an Agent check, or examine the Aggregator source code directly.
+Via the DogStatsD server (bundled with the Datadog Agent) and a client library.
+Directly via Datadog’s HTTP API.
+Via Dropwizard’s Java metrics library with the metrics-datadog backend.
+Thanks to the good folks at Vistar Media, Coursera, and Bazaarvoice for their contributions.
+
+
+Naming metrics
+There are a few rules regarding metric names:
+
+Must start with a letter.
+Must only contain ASCII alphanumerics, underscores, and periods.
+Other characters, including spaces, are converted to underscores.
+Unicode is not supported.
+Must not exceed 200 characters. Fewer than 100 is preferred from a UI perspective.
+Metrics reported by the Agent are in a pseudo-hierarchical dotted format
+(e.g. http.nginx.response_time). The hierarchy is neither enforced nor interpreted,
+but it can be used to infer things about servers (e.g. “hey, I see hostA and hostB are reporting http.nginx.*, those must be web frontends”).
+
+
+In the Datadog web application there are five metric types (though one is deprecated):
+
+COUNT
+COUNTER (deprecated)
+DISTRIBUTION
+GAUGE
+RATE
